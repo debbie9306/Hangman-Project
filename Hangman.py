@@ -4,11 +4,80 @@ countries = ["Austria", "Belgium", "Bulgaria", "Cyprus", "Czech Republic", "Denm
 
 answer = random.choice(countries).lower()
 guessed_letters = []
-tries = 8
+#for illustration, reduced tries from 8 to 6
+tries = 6
+#added stages to illustrate hangman
+stages = [
+"""
+  -----
+  |   |
+      |
+      |
+      |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+      |
+      |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+  |   |
+      |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+ /|   |
+      |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+---------
+""",
+"""
+  -----
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+---------
+"""
+]
 
 print("Welcome to Hangman Game!")
 
 while tries > 0:
+    print(stages[6 - tries])
+    
     display_word = ""
 
     for letter in answer:
@@ -20,6 +89,8 @@ while tries > 0:
             display_word += "_"
 
     print("\nWord:", display_word)
+    #To shoe which letter has been checked already
+    print("Guessed letters:", " ".join(guessed_letters))
 
     if "_" not in display_word:
         print("You won! The word was:", answer.title())
@@ -42,4 +113,6 @@ while tries > 0:
         print("That letter is not in the word. Tries left:", tries)
 
 if tries == 0:
+    #for the final illustration
+    print(stages[6])
     print("You lost! The word was:", answer.title())
